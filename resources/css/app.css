@@ -5,7 +5,190 @@
 @source '../**/*.blade.php';
 @source '../**/*.js';
 
+/* Clases dinámicas de Alpine (:class bindings) — forzar compilación */
+@source inline("text-white text-white/90 text-white/80 text-white/70 text-white/60 text-white/55 text-gray-700 text-brand-700 text-brand-200 text-brand-300 hover:text-white hover:text-brand-700 hover:text-brand-800 hover:bg-white/10 hover:bg-white/20 hover:bg-white/15 bg-transparent bg-white/10 bg-white/15 bg-white/95 bg-accent-500 bg-brand-700 bg-brand-800 bg-white/15 backdrop-blur-md shadow-sm translate-x-0 -translate-x-full border-brand-700 border-white/15 opacity-0 opacity-100 transition-opacity duration-1000 ease-in-out border-green-500 border-red-500 border-amber-500 border-blue-500 bg-green-50 bg-red-50 bg-amber-50 bg-blue-50 bg-green-100 bg-red-100 bg-amber-100 bg-blue-100 bg-green-500 bg-red-500 bg-amber-500 bg-blue-500 text-green-600 text-red-600 text-amber-600 text-blue-600 bg-blue-50/60 hover:bg-blue-50 bg-red-50/60 hover:bg-red-50");
+
 @theme {
-    --font-sans: 'Instrument Sans', ui-sans-serif, system-ui, sans-serif, 'Apple Color Emoji', 'Segoe UI Emoji',
-        'Segoe UI Symbol', 'Noto Color Emoji';
+    --font-sans: 'Inter', ui-sans-serif, system-ui, sans-serif;
+
+    /* Guinda — color principal (rojo-vino, no rosa) */
+    --color-brand-50:  #fff0f1;
+    --color-brand-100: #ffe0e2;
+    --color-brand-200: #ffc0c5;
+    --color-brand-300: #ff8f98;
+    --color-brand-400: #f75d6a;
+    --color-brand-500: #ee2d3f;
+    --color-brand-600: #d01428;
+    --color-brand-700: #a8202e;
+    --color-brand-800: #851a25;
+    --color-brand-900: #62131b;
+
+    /* Gris — segundo color */
+    --color-accent-400: #9ca3af;
+    --color-accent-500: #6b7280;
+    --color-accent-600: #4b5563;
+
+    /* Paleta de pintura — porque somos tienda de pinturas */
+    --color-paint-red:    #d63031;
+    --color-paint-orange: #e17055;
+    --color-paint-yellow: #fdcb6e;
+    --color-paint-green:  #00b894;
+    --color-paint-teal:   #0984e3;
+    --color-paint-blue:   #2d3436;
+    --color-paint-purple: #6c5ce7;
+    --color-paint-pink:   #e84393;
+}
+
+@layer base {
+    html {
+        scroll-behavior: smooth;
+    }
+
+    body {
+        font-family: var(--font-sans);
+    }
+
+    .nav-item       { color: rgba(255, 255, 255, 0.9); }
+    .nav-item:hover { color: white; }
+    .nav-btn        { color: white; }
+}
+
+/* Logo */
+.logo {
+    border-radius: 10px;
+}
+
+
+/* Fondo panel izquierdo del login */
+.login-panel-bg {
+    background-image: url('/images/Muestrario.jpg');
+    background-size: cover;
+    background-position: center;
+    background-repeat: no-repeat;
+}
+
+/* Decoraciones tipo manchas de pintura */
+.deco-paint-red    { background: radial-gradient(circle, #e63e28, transparent 70%); }
+.deco-paint-orange { background: radial-gradient(circle, #f97316, transparent 70%); }
+.deco-paint-brand  { background: radial-gradient(circle, #a8202e, transparent 70%); }
+.deco-paint-blue   { background: radial-gradient(circle, #3b82f6, transparent);     }
+
+/* Overlay oscuro del hero */
+.hero-overlay {
+    background: linear-gradient(to right, rgba(0,0,0,0.82) 0%, rgba(0,0,0,0.70) 50%, rgba(0,0,0,0.55) 100%);
+}
+
+/* Sombra para texto sobre imágenes */
+.hero-text-shadow {
+    text-shadow: 0 2px 12px rgba(0,0,0,0.7), 0 1px 3px rgba(0,0,0,0.5);
+}
+
+/* Texto "mundo" con gradiente cálido */
+.text-gradient-warm {
+    display: inline-block;
+    background: linear-gradient(90deg, #ffa600, #ff5328);
+    -webkit-background-clip: text;
+    -webkit-text-fill-color: transparent;
+    background-clip: text;
+    text-shadow: none;
+}
+
+/* Gradiente guinda principal (banners, footer icon) */
+.bg-brand-gradient {
+    background: linear-gradient(135deg, #a8202e, #62131b);
+}
+
+/* Fondo sutil de la sección resultado en calculadora */
+.calc-result-bg {
+    background: linear-gradient(135deg, #a8202e08, #a8202e14);
+}
+
+/* ── Botones del POS ─────────────────────────────────────────────────────── */
+.btn-pos-nuevo {
+    @apply inline-flex items-center gap-1 px-3 py-1.5 rounded-lg text-xs font-semibold
+           text-gray-600 border border-dashed border-gray-400 transition-colors
+           hover:text-brand-700 hover:bg-brand-50 hover:border-brand-300;
+}
+
+.btn-pos-libre {
+    @apply inline-flex items-center gap-1 px-2.5 py-1.5 rounded-lg text-xs font-semibold
+           text-violet-600 border border-violet-400 transition-colors
+           hover:bg-violet-50 hover:border-violet-500;
+}
+
+.btn-pos-buscar {
+    @apply inline-flex items-center gap-1.5 px-2.5 py-1.5 rounded-lg text-xs font-semibold
+           bg-blue-500 text-white transition-colors hover:bg-blue-600;
+}
+
+.btn-pos-entrada {
+    @apply inline-flex items-center gap-1 px-2.5 py-1.5 rounded-lg text-xs font-semibold
+           bg-teal-500 text-white transition-colors hover:bg-teal-600;
+}
+
+.btn-pos-salida {
+    @apply inline-flex items-center gap-1 px-2.5 py-1.5 rounded-lg text-xs font-semibold
+           bg-red-500 text-white transition-colors hover:bg-red-600;
+}
+
+.btn-pos-tab-active {
+    @apply shrink-0 inline-flex items-center px-3 py-1.5 rounded-lg text-xs font-semibold
+           transition-colors bg-brand-700 text-white;
+}
+
+/* ── Ítems del ticket ────────────────────────────────────────────────────── */
+.item-row {
+    @apply px-4 py-3.5 border-b border-gray-100 hover:bg-gray-50/60 transition-colors;
+}
+
+.item-name {
+    @apply font-semibold text-gray-900 text-sm leading-snug truncate;
+}
+
+.item-badge {
+    @apply inline-block mt-0.5 text-xs text-gray-400 bg-gray-100 rounded px-1.5 py-0.5;
+}
+
+.item-subtotal {
+    @apply font-bold text-gray-900 tabular-nums text-sm;
+}
+
+.item-unit-price {
+    @apply text-xs text-gray-400 tabular-nums;
+}
+
+.item-stepper {
+    @apply inline-flex items-center rounded-lg border border-gray-200 overflow-hidden;
+}
+
+.item-stepper-btn {
+    @apply w-8 h-8 flex items-center justify-center text-base font-bold text-gray-400
+           bg-gray-50 hover:bg-brand-50 hover:text-brand-700 transition-colors select-none;
+}
+
+.item-stepper-val {
+    @apply min-w-10 px-2 h-8 flex items-center justify-center text-sm font-bold
+           text-gray-800 tabular-nums border-x border-gray-200 cursor-pointer
+           hover:bg-brand-50 hover:text-brand-700 transition-colors;
+}
+
+.item-stepper-input {
+    @apply min-w-10 w-14 px-2 h-8 text-center text-sm font-bold tabular-nums
+           border-x border-brand-400 bg-brand-50 text-brand-700
+           focus:outline-none focus:ring-2 focus:ring-inset focus:ring-brand-300;
+}
+
+.item-delete {
+    @apply w-6 h-6 flex items-center justify-center rounded-md text-gray-300
+           hover:text-red-500 hover:bg-red-50 transition-colors opacity-0 group-hover:opacity-100;
+}
+
+.item-error {
+    @apply mt-1 text-xs text-red-500;
+}
+
+.btn-pos-tab-inactive {
+    @apply shrink-0 inline-flex items-center px-3 py-1.5 rounded-lg text-xs font-semibold
+           transition-colors bg-white text-gray-500 border border-gray-200
+           hover:text-brand-700 hover:border-brand-200;
 }
